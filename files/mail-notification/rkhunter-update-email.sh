@@ -5,7 +5,7 @@ EMAIL="$1"
 FQDN="$(hostname -f)"
 [[ "$#" -gt 1 ]]&& export http_proxy="$2"
 [[ "$#" -gt 1 ]]&& export https_proxy="$2"
-RKHUNTER_OUTPUT="$(rkhunter --cronjob --syslog --update)"
+RKHUNTER_OUTPUT="$(rkhunter --cronjob --syslog --update &>/dev/null || true)"
 
 if [ -n "$RKHUNTER_OUTPUT" ]; then
     if which mail &>/dev/null; then
